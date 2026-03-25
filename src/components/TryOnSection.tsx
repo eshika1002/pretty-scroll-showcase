@@ -19,7 +19,7 @@ const TryOnSection = () => {
           Virtual Try-On
         </h2>
         <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-10">
-          {/* Image with color overlay */}
+          {/* Image with lips overlay */}
           <div className="relative w-72 h-72 rounded-xl overflow-hidden shadow-md">
             <img
               src={tryonImg}
@@ -29,17 +29,28 @@ const TryOnSection = () => {
               height={800}
               className="w-full h-full object-cover"
             />
+            {/* Lips overlay — positioned over the lip area only */}
             {activeShade && (
               <div
-                className="absolute inset-0 mix-blend-multiply transition-colors duration-300 pointer-events-none"
-                style={{ backgroundColor: activeShade }}
+                className="absolute pointer-events-none transition-colors duration-300"
+                style={{
+                  top: "62%",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "22%",
+                  height: "8%",
+                  borderRadius: "50% 50% 45% 45%",
+                  backgroundColor: activeShade,
+                  opacity: 0.55,
+                  filter: "blur(2px)",
+                }}
               />
             )}
           </div>
 
           <div className="flex-1 text-center md:text-left">
             <p className="text-muted-foreground mb-6">
-              Click a shade to preview the color on the image.
+              Click a shade to preview the lipstick color.
             </p>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               {shades.map((s) => (
