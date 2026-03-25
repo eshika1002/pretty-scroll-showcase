@@ -2,7 +2,8 @@ import heroImage from "@/assets/hero-beauty.jpg";
 import lipstickImg from "@/assets/product-lipstick.jpg";
 import serumImg from "@/assets/product-serum.jpg";
 import creamImg from "@/assets/product-cream.jpg";
-import tryonImg from "@/assets/tryon-model.jpg";
+import TryOnSection from "@/components/TryOnSection";
+import LaraChatbot from "@/components/LaraChatbot";
 
 const Header = () => (
   <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
