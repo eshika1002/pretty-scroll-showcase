@@ -1,5 +1,4 @@
 import { useState } from "react";
-import tryonImg from "@/assets/tryon-model.jpg";
 
 const shades = [
   { name: "Classic Red", color: "#c0392b" },
@@ -10,7 +9,7 @@ const shades = [
 ];
 
 const TryOnSection = () => {
-  const [activeShade, setActiveShade] = useState<string | null>(null);
+  const [activeShade, setActiveShade] = useState<typeof shades[number] | null>(null);
 
   return (
     <section id="tryon" className="py-24 bg-rose-light">
@@ -18,77 +17,45 @@ const TryOnSection = () => {
         <h2 className="font-display text-4xl md:text-5xl text-center mb-16 text-foreground">
           Virtual Try-On
         </h2>
-        <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-10">
-          {/* Image with lips overlay */}
-          <div className="relative w-72 h-72 rounded-xl overflow-hidden shadow-md">
-            <img
-              src={tryonImg}
-              alt="Try on lipstick shades"
-              loading="lazy"
-              width={800}
-              height={800}
-              className="w-full h-full object-cover"
-            />
-            {/* Lips overlay — positioned over the lip area only */}
-            {activeShade && (
-              <div
-                className="absolute pointer-events-none transition-colors duration-300"
-                style={{
-                  top: "62%",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  width: "22%",
-                  height: "8%",
-                  borderRadius: "50% 50% 45% 45%",
-                  backgroundColor: activeShade,
-                  opacity: 0.55,
-                  filter: "blur(2px)",
-                }}
-              />
+        <div className="max-w-xl mx-auto text-center">
+          {/* Swatch preview box */}
+          <div
+            className="w-44 h-44 mx-auto rounded-2xl shadow-lg border border-border transition-colors duration-500 flex items-center justify-center"
+            style={{ backgroundColor: activeShade ? activeShade.color : "hsl(var(--muted))" }}
+          >
+            {!activeShade && (
+              <span className="text-muted-foreground text-sm">Select a shade</span>
             )}
+          </div>
+          <p className="mt-4 font-display text-xl text-foreground min-h-[1.75rem]">
+            {activeShade ? activeShade.name : ""}
+          </p>
+
+          {/* Shade buttons */}
+          <div className="flex flex-wrap gap-4 justify-center mt-8">
+            {shades.map((s) => (
+              <button
+                key={s.name}
+                title={s.name}
+                onClick={() => setActiveShade(activeShade?.name === s.name ? null : s)}
+                style={{ backgroundColor: s.color }}
+                className={`w-12 h-12 rounded-full border-2 shadow hover:scale-125 hover:shadow-lg transition-all duration-300 ${
+                  activeShade?.name === s.name
+                    ? "border-foreground scale-110 ring-2 ring-foreground/30"
+                    : "border-background"
+                }`}
+              />
+            ))}
           </div>
 
-          <div className="flex-1 text-center md:text-left">
-            <p className="text-muted-foreground mb-6">
-              Click a shade to preview the lipstick color.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-              {shades.map((s) => (
-                <button
-                  key={s.name}
-                  title={s.name}
-                  onClick={() => setActiveShade(activeShade === s.color ? null : s.color)}
-                  style={{ backgroundColor: s.color }}
-                  className={`w-12 h-12 rounded-full border-2 shadow hover:scale-125 hover:shadow-lg transition-all duration-300 ${
-                    activeShade === s.color
-                      ? "border-foreground scale-110 ring-2 ring-foreground/30"
-                      : "border-background"
-                  }`}
-                />
-              ))}
-            </div>
-            <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
-              {shades.map((s) => (
-                <span
-                  key={s.name}
-                  className={`text-xs cursor-pointer transition-colors ${
-                    activeShade === s.color ? "text-foreground font-medium" : "text-muted-foreground"
-                  }`}
-                  onClick={() => setActiveShade(activeShade === s.color ? null : s.color)}
-                >
-                  {s.name}
-                </span>
-              ))}
-            </div>
-            {activeShade && (
-              <button
-                onClick={() => setActiveShade(null)}
-                className="mt-6 text-xs uppercase tracking-widest text-primary hover:underline"
-              >
-                Clear Selection
-              </button>
-            )}
-          </div>
+          {activeShade && (
+            <button
+              onClick={() => setActiveShade(null)}
+              className="mt-6 text-xs uppercase tracking-widest text-primary hover:underline"
+            >
+              Clear Selection
+            </button>
+          )}
         </div>
       </div>
     </section>
