@@ -2,7 +2,8 @@ import heroImage from "@/assets/hero-beauty.jpg";
 import lipstickImg from "@/assets/product-lipstick.jpg";
 import serumImg from "@/assets/product-serum.jpg";
 import creamImg from "@/assets/product-cream.jpg";
-import tryonImg from "@/assets/tryon-model.jpg";
+import TryOnSection from "@/components/TryOnSection";
+import LaraChatbot from "@/components/LaraChatbot";
 
 const Header = () => (
   <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
@@ -101,72 +102,6 @@ const Reviews = () => (
   </section>
 );
 
-const shades = [
-  { name: "Classic Red", color: "#c0392b" },
-  { name: "Rosewood", color: "#b5495b" },
-  { name: "Nude Pink", color: "#d4a5a5" },
-  { name: "Berry", color: "#8e3a59" },
-  { name: "Coral", color: "#e07c6e" },
-];
-
-const TryOn = () => (
-  <section id="tryon" className="py-24 bg-rose-light">
-    <div className="container mx-auto px-6">
-      <h2 className="font-display text-4xl md:text-5xl text-center mb-16 text-foreground">Virtual Try-On</h2>
-      <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-10">
-        <img src={tryonImg} alt="Try on lipstick shades" loading="lazy" width={800} height={800}
-          className="w-72 h-72 object-cover rounded-xl shadow-md" />
-        <div className="flex-1 text-center md:text-left">
-          <p className="text-muted-foreground mb-6">Pick a shade and hover to preview the color.</p>
-          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-            {shades.map((s) => (
-              <button key={s.name} title={s.name}
-                style={{ backgroundColor: s.color }}
-                className="w-12 h-12 rounded-full border-2 border-background shadow hover:scale-125 hover:shadow-lg transition-all duration-300"
-              />
-            ))}
-          </div>
-          <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
-            {shades.map((s) => (
-              <span key={s.name} className="text-xs text-muted-foreground">{s.name}</span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-const Chatbot = () => (
-  <section className="py-24 bg-background">
-    <div className="container mx-auto px-6">
-      <h2 className="font-display text-4xl md:text-5xl text-center mb-16 text-foreground">Ask Lara</h2>
-      <div className="max-w-sm mx-auto bg-card border border-border rounded-2xl shadow-lg overflow-hidden">
-        <div className="bg-primary text-primary-foreground px-6 py-4 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-primary-foreground/20 flex items-center justify-center text-sm font-bold">L</div>
-          <span className="font-body text-sm tracking-wide">Lara — Beauty Assistant</span>
-        </div>
-        <div className="p-5 space-y-3 min-h-[200px]">
-          <div className="bg-muted rounded-xl rounded-tl-none px-4 py-3 text-sm text-foreground max-w-[80%]">
-            Hi! I'm Lara 💕 How can I help you find the perfect product?
-          </div>
-          <div className="bg-primary/10 rounded-xl rounded-tr-none px-4 py-3 text-sm text-foreground max-w-[80%] ml-auto">
-            I'm looking for a hydrating cream.
-          </div>
-          <div className="bg-muted rounded-xl rounded-tl-none px-4 py-3 text-sm text-foreground max-w-[80%]">
-            Our Silk Cream is perfect! It has hyaluronic acid for all-day moisture.
-          </div>
-        </div>
-        <div className="border-t border-border px-4 py-3 flex items-center gap-2">
-          <input type="text" placeholder="Type a message..." disabled
-            className="flex-1 bg-muted/50 rounded-full px-4 py-2 text-sm text-muted-foreground outline-none cursor-not-allowed" />
-          <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-xs">→</div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const Contact = () => (
   <section id="contact" className="py-24 bg-rose-light">
     <div className="container mx-auto px-6">
@@ -207,10 +142,10 @@ const Index = () => (
     <Hero />
     <Products />
     <Reviews />
-    <TryOn />
-    <Chatbot />
+    <TryOnSection />
     <Contact />
     <Footer />
+    <LaraChatbot />
   </div>
 );
 
